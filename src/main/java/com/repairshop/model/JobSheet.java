@@ -1,0 +1,54 @@
+package com.repairshop.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "job_sheets")
+@Data
+public class JobSheet extends BaseAuditableEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String jobNumber;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    private String deviceType;
+    private String brand;
+    private String model;
+    private String serialNumber;
+
+    @Column(columnDefinition = "TEXT")
+    private String problemDescription;
+
+    @Column(columnDefinition = "TEXT")
+    private String accessories;
+
+    private String technician;
+    private BigDecimal estimatedCost;
+    private BigDecimal finalCost;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private JobStatus status = JobStatus.RECEIVED;
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
+    private LocalDate receivedDate;
+    private LocalDate deliveryDate;
+    private LocalDate deliveredDate;
+
+}
