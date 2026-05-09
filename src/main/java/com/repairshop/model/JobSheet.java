@@ -47,6 +47,12 @@ public class JobSheet extends BaseAuditableEntity {
     @Column(columnDefinition = "TEXT")
     private String notes;
 
+    @Column(columnDefinition = "TEXT")
+    private String materialUsed;
+
+    @Column(columnDefinition = "TEXT")
+    private String actionTaken;
+
     private LocalDate receivedDate;
     private LocalDate deliveryDate;
     private LocalDate deliveredDate;

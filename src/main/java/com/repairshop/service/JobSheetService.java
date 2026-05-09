@@ -98,6 +98,8 @@ public class JobSheetService {
         j.setTechnician(req.getTechnician());
         j.setEstimatedCost(req.getEstimatedCost());
         j.setFinalCost(req.getFinalCost());
+        j.setMaterialUsed(req.getMaterialUsed());
+        j.setActionTaken(req.getActionTaken());
         
         if (req.getStatus() != null) {
             j.setStatus(req.getStatus());

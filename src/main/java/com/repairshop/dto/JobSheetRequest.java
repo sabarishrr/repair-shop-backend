@@ -19,6 +19,8 @@ public class JobSheetRequest {
     private BigDecimal finalCost;
     private JobStatus status;
     private String notes;
+    private String materialUsed;
+    private String actionTaken;
     private LocalDate receivedDate;
     private LocalDate deliveryDate;
 }
