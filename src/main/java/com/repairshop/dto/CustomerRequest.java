@@ -10,5 +10,11 @@ public class CustomerRequest {
     private String phone;
     private String email;
     private String address;
+    private String companyName;
+    private String gstin;
     private State state;
+    private String customerType;
+    private String pinCode;
+    private String shippingAddress;
+    private String shippingPinCode;
 }

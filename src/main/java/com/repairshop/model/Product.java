@@ -26,4 +26,17 @@ public class Product extends BaseAuditableEntity {
 
     @Column(nullable = false)
     private BigDecimal gstPercentage;
+
+    @Column(nullable = false)
+    private Integer stockQuantity = 0;
+
+    private String uom = "NOS";
+
+    private BigDecimal purchasePrice;
+
+    private BigDecimal mrp;
+
+    private BigDecimal wholesalePrice;
+
+    private Integer reorderLevel = 0;
 }

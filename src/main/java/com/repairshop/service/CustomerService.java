@@ -42,7 +42,13 @@ public class CustomerService {
         c.setPhone(req.getPhone());
         c.setEmail(req.getEmail());
         c.setAddress(req.getAddress());
+        c.setCompanyName(req.getCompanyName());
+        c.setGstin(req.getGstin());
         c.setState(req.getState());
+        c.setCustomerType(req.getCustomerType() != null ? req.getCustomerType() : "UNREGISTERED");
+        c.setPinCode(req.getPinCode());
+        c.setShippingAddress(req.getShippingAddress());
+        c.setShippingPinCode(req.getShippingPinCode());
         return customerRepository.save(c);
     }
 

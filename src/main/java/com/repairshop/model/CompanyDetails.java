@@ -34,4 +34,15 @@ public class CompanyDetails extends BaseAuditableEntity {
 
     private String gstNumber;
 
+    private String bankName;
+    private String accountNumber;
+    private String branchIfsCode;
+
+    private Long nextInvoiceNo = 1L;
+    private Long nextReceiptNo = 1L;
+    private Long nextPaymentNo = 1L;
+    
+    private String invoicePrefix = "INV-";
+    private String receiptPrefix = "REC-";
+    private String paymentPrefix = "PAY-";
 }

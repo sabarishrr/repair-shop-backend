@@ -35,6 +35,11 @@ public class ProductService {
         existing.setRate(product.getRate());
         existing.setHsn(product.getHsn());
         existing.setGstPercentage(product.getGstPercentage());
+        existing.setUom(product.getUom());
+        existing.setPurchasePrice(product.getPurchasePrice());
+        existing.setMrp(product.getMrp());
+        existing.setWholesalePrice(product.getWholesalePrice());
+        existing.setReorderLevel(product.getReorderLevel());
         return repository.save(existing);
     }
 
