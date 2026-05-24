@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -17,6 +18,9 @@ public interface JobSheetRepository extends JpaRepository<JobSheet, Long> {
     List<JobSheet> findTop10ByOrderByCreatedAtDesc();
 
     List<JobSheet> findByStatusOrderByCreatedAtDesc(JobStatus status);
+
+    List<JobSheet> findByReceivedDateBetweenOrderByReceivedDateDesc(LocalDate startDate, LocalDate endDate);
+
 
     @Query("SELECT j FROM JobSheet j WHERE LOWER(j.jobNumber) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(j.customer.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(j.customer.phone) LIKE LOWER(CONCAT('%', :query, '%')) ORDER BY j.createdAt DESC")
     List<JobSheet> search(String query);
