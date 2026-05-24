@@ -43,8 +43,13 @@ public class SalesInvoiceService {
         
         CompanyDetails company = companyDetailsService.get();
         String finalInvNum = req.getInvoiceNumber();
-        if (finalInvNum == null || finalInvNum.trim().isEmpty() || finalInvNum.startsWith("INV-")) {
+        if (finalInvNum == null || finalInvNum.trim().isEmpty()) {
             finalInvNum = company.getInvoicePrefix() + company.getNextInvoiceNo();
+            company.setNextInvoiceNo(company.getNextInvoiceNo() + 1);
+            companyDetailsService.update(company);
+        } else {
+            // Frontend provided the invoice number (assembled from nextInvoiceNo).
+            // Still increment the counter so the next invoice gets a new number.
             company.setNextInvoiceNo(company.getNextInvoiceNo() + 1);
             companyDetailsService.update(company);
         }
@@ -113,6 +118,8 @@ public class SalesInvoiceService {
                 item.setDescription(itemReq.getDescription());
                 item.setHsn(itemReq.getHsn());
             }
+            item.setSerialNumber(itemReq.getSerialNumber());
+            item.setWarrantyPeriod(itemReq.getWarrantyPeriod());
 
             item.setGstPercentage(gstPerc);
 
@@ -247,6 +254,8 @@ public class SalesInvoiceService {
                 item.setDescription(itemReq.getDescription());
                 item.setHsn(itemReq.getHsn());
             }
+            item.setSerialNumber(itemReq.getSerialNumber());
+            item.setWarrantyPeriod(itemReq.getWarrantyPeriod());
 
             item.setGstPercentage(gstPerc);
 

@@ -3,38 +3,33 @@ package com.repairshop.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "sales_invoice_items")
+@Table(name = "credit_note_items")
 @Data
-public class SalesInvoiceItem {
+public class CreditNoteItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sales_invoice_id", nullable = false)
+    @JoinColumn(name = "credit_note_id", nullable = false)
     @com.fasterxml.jackson.annotation.JsonBackReference
-    private SalesInvoice salesInvoice;
+    private CreditNote creditNote;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    private Product product; // Optional, can be null for ad-hoc service charges
+    private Product product; // Optional, can be null for service/ad-hoc adjustments
 
-    private String description; // Fallback if no product, or custom description
+    private String description;
     private String hsn;
-    private String serialNumber;
-    private String warrantyPeriod;
 
     @Column(nullable = false)
     private Integer quantity;
 
     @Column(nullable = false)
     private BigDecimal unitPrice;
-
-    private BigDecimal discount = BigDecimal.ZERO;
 
     @Column(nullable = false)
     private BigDecimal gstPercentage = BigDecimal.ZERO;

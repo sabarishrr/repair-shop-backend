@@ -37,12 +37,17 @@ public class CompanyDetails extends BaseAuditableEntity {
     private String bankName;
     private String accountNumber;
     private String branchIfsCode;
+    private String upiId;
 
     private Long nextInvoiceNo = 1L;
     private Long nextReceiptNo = 1L;
     private Long nextPaymentNo = 1L;
+    private Long nextCreditNoteNo = 1L;
+    private Long nextDebitNoteNo = 1L;
     
     private String invoicePrefix = "INV-";
     private String receiptPrefix = "REC-";
     private String paymentPrefix = "PAY-";
+    private String creditNotePrefix = "CN-";
+    private String debitNotePrefix = "DN-";
 }

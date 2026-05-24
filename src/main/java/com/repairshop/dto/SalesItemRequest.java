@@ -8,6 +8,8 @@ public class SalesItemRequest {
     private Long productId; // Optional, can be null for custom service
     private String description;
     private String hsn;
+    private String serialNumber;
+    private String warrantyPeriod;
     private Integer quantity;
     private BigDecimal unitPrice;
     private BigDecimal discount;
