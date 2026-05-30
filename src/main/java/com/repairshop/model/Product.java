@@ -39,4 +39,6 @@ public class Product extends BaseAuditableEntity {
     private BigDecimal wholesalePrice;
 
     private Integer reorderLevel = 0;
+
+    private boolean active = true;
 }

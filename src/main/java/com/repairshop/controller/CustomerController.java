@@ -17,9 +17,14 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    public List<Customer> getAll(@RequestParam(required = false) String search) {
+    public List<Customer> getAll(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false, defaultValue = "false") boolean activeOnly) {
         if (search != null && !search.isBlank()) {
             return customerService.search(search);
+        }
+        if (activeOnly) {
+            return customerService.getActive();
         }
         return customerService.getAll();
     }
@@ -43,5 +48,10 @@ public class CustomerController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         customerService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/toggle-active")
+    public Customer toggleActive(@PathVariable Long id) {
+        return customerService.toggleActive(id);
     }
 }

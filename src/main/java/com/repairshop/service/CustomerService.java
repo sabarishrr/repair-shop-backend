@@ -18,6 +18,16 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public List<Customer> getActive() {
+        return customerRepository.findByActiveTrueOrderByNameAsc();
+    }
+
+    public Customer toggleActive(Long id) {
+        Customer c = getById(id);
+        c.setActive(!c.isActive());
+        return customerRepository.save(c);
+    }
+
     public List<Customer> search(String query) {
         return customerRepository.findByNameContainingIgnoreCaseOrPhoneContaining(query, query);
     }

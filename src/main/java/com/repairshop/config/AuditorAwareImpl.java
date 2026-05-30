@@ -7,12 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import org.springframework.lang.NonNull;
 
 @Component
 public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
-    public Optional<String> getCurrentAuditor() {
+    @SuppressWarnings("null")
+    @NonNull public Optional<String> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {

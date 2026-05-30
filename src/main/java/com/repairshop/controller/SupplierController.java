@@ -17,7 +17,8 @@ public class SupplierController {
     private final SupplierService supplierService;
 
     @GetMapping
-    public List<Supplier> getAll() {
+    public List<Supplier> getAll(@RequestParam(required = false, defaultValue = "false") boolean activeOnly) {
+        if (activeOnly) return supplierService.getActive();
         return supplierService.getAll();
     }
 
@@ -40,5 +41,10 @@ public class SupplierController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         supplierService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/toggle-active")
+    public Supplier toggleActive(@PathVariable Long id) {
+        return supplierService.toggleActive(id);
     }
 }

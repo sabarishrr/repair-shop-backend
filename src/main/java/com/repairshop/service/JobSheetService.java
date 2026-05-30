@@ -8,6 +8,8 @@ import com.repairshop.model.JobSheet;
 import com.repairshop.model.JobStatus;
 import com.repairshop.repository.JobSheetRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -82,6 +84,14 @@ public class JobSheetService {
 
     public JobSheet update(Long id, JobSheetRequest req) {
         JobSheet j = getById(id);
+        // Block technicians from editing delivered jobs
+        if (j.getStatus() == JobStatus.DELIVERED) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null && auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_TECHNICIAN"))) {
+                throw new RuntimeException("Technicians cannot edit delivered jobs");
+            }
+        }
         return save(j, req);
     }
 
@@ -98,6 +108,8 @@ public class JobSheetService {
         j.setTechnician(req.getTechnician());
         j.setEstimatedCost(req.getEstimatedCost());
         j.setFinalCost(req.getFinalCost());
+        j.setPaymentStatus(req.getPaymentStatus() != null ? req.getPaymentStatus() : j.getPaymentStatus());
+        j.setPaymentMethod(req.getPaymentMethod());
         j.setMaterialUsed(req.getMaterialUsed());
         j.setActionTaken(req.getActionTaken());
         

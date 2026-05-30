@@ -44,6 +44,13 @@ public class JobSheet extends BaseAuditableEntity {
     @Column(nullable = false)
     private JobStatus status = JobStatus.RECEIVED;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentStatus paymentStatus = PaymentStatus.UNPAID;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
+
     @Column(columnDefinition = "TEXT")
     private String notes;
 

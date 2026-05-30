@@ -20,6 +20,19 @@ public class ProductService {
         return repository.findAll();
     }
 
+    public List<Product> getActiveProducts(String search) {
+        if (search != null && !search.trim().isEmpty()) {
+            return repository.findByActiveTrueAndNameContainingIgnoreCase(search);
+        }
+        return repository.findByActiveTrue();
+    }
+
+    public Product toggleActive(Long id) {
+        Product p = getProductById(id);
+        p.setActive(!p.isActive());
+        return repository.save(p);
+    }
+
     public Product getProductById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
     }

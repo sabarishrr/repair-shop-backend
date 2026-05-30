@@ -18,6 +18,16 @@ public class SupplierService {
         return supplierRepository.findAllByOrderByNameAsc();
     }
 
+    public List<Supplier> getActive() {
+        return supplierRepository.findByActiveTrueOrderByNameAsc();
+    }
+
+    public Supplier toggleActive(Long id) {
+        Supplier s = getById(id);
+        s.setActive(!s.isActive());
+        return supplierRepository.save(s);
+    }
+
     public Supplier getById(Long id) {
         return supplierRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Supplier not found: " + id));

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findByNameContainingIgnoreCaseOrPhoneContaining(String name, String phone);
+    List<Customer> findByActiveTrueOrderByNameAsc();
 }

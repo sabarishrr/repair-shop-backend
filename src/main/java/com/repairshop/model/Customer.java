@@ -34,6 +34,8 @@ public class Customer extends BaseAuditableEntity {
     private String customerType = "UNREGISTERED";
     private String pinCode;
 
+    private boolean active = true;
+
     @Column(columnDefinition = "TEXT")
     private String shippingAddress;
     private String shippingPinCode;

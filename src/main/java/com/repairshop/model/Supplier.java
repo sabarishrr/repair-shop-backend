@@ -25,4 +25,6 @@ public class Supplier extends BaseAuditableEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;
+
+    private boolean active = true;
 }

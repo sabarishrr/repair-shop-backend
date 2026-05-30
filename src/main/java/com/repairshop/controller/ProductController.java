@@ -16,7 +16,10 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public List<Product> getAll(@RequestParam(required = false) String search) {
+    public List<Product> getAll(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false, defaultValue = "false") boolean activeOnly) {
+        if (activeOnly) return service.getActiveProducts(search);
         return service.getAllProducts(search);
     }
 
@@ -39,5 +42,10 @@ public class ProductController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteProduct(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}/toggle-active")
+    public Product toggleActive(@PathVariable Long id) {
+        return service.toggleActive(id);
     }
 }

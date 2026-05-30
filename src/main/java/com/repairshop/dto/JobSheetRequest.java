@@ -1,6 +1,8 @@
 package com.repairshop.dto;
 
 import com.repairshop.model.JobStatus;
+import com.repairshop.model.PaymentStatus;
+import com.repairshop.model.PaymentMethod;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,9 +20,12 @@ public class JobSheetRequest {
     private BigDecimal estimatedCost;
     private BigDecimal finalCost;
     private JobStatus status;
+    private PaymentStatus paymentStatus;
+    private PaymentMethod paymentMethod;
     private String notes;
     private String materialUsed;
     private String actionTaken;
     private LocalDate receivedDate;
     private LocalDate deliveryDate;
 }
+
